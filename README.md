@@ -54,7 +54,8 @@ ShortcutsBehaviour = Marionette.Behavior.extend({
   console.log("Delete something!");
  }
 }
-
+````   
+````javascript
 
 View.MyForm = Marionette.ItemView.extend({
  tagName: 'form',
