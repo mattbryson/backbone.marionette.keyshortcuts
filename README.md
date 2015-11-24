@@ -25,45 +25,44 @@ It supports single keys and key combinations. To define the event trigger, add a
 View.MyForm = Marionette.ItemView.extend({
  tagName: 'form',
  keyShortcuts:{
-   'command+s' : 'save',
-   'up up down left' : function() { console.log('cheat!') },
-    'd::keyup' : function() { console.log('d key was released') },
-  },
-  events: {
-    'click @saveBtn' : 'save',
-  },
-  ui: {
-    'saveBtn' : '.save'
-  },
-  save: function(e) {
-    e.preventDefault(); //stop the browser saving..
-    this.model.save();
-  }
+  'command+s' : 'save',
+  'up up down left' : function() { console.log('cheat!') },
+  'd::keyup' : function() { console.log('d key was released') },
+ },
+ events: {
+  'click @saveBtn' : 'save',
+ },
+ ui: {
+  'saveBtn' : '.save'
+ },
+ save: function(e) {
+  e.preventDefault(); //stop the browser saving..
+  this.model.save();
+ }
 });
 ````
-Or you can define them in a Behaviors class
+Or you can define them in a Behavior class
 ```` javascript   
 ShortcutsBehaviour = Marionette.Behavior.extend({
-
-  keyShortcuts: {
-    "backspace": "delete",
-    "del": "delete"
-  },
-
-  delete:functio(e) {
-    e.preventDefault(); //stop the browser from navigating back
-    console.log("Delete something!");
-  }
+ keyShortcuts: {
+  "backspace": "delete",
+  "del": "delete"
+ },
+ 
+ delete:functio(e) {
+  e.preventDefault(); //stop the browser from navigating back
+  console.log("Delete something!");
+ }
 }
 
 
 View.MyForm = Marionette.ItemView.extend({
-  tagName: 'form',
-  behaviors: {
-    ShortcutsBehaviour: {
-      behaviorClass: ShortcutsBehaviour
-    }
-  },
+ tagName: 'form',
+ behaviors: {
+  ShortcutsBehaviour: {
+   behaviorClass: ShortcutsBehaviour
+  }
+ },
 });
 ````
 
