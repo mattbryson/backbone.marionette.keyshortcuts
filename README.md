@@ -26,7 +26,7 @@ It supports single keys and key combinations. To define the event trigger, add a
       tagName: 'form',
       keyShortcuts:{
         'command+s' : 'save',
-        'up up down left' : function() { console.log('cheat!'') },
+        'up up down left' : function() { console.log('cheat!') },
         'd::keyup' : function() { console.log('d key was released') },
       },
       events: {
