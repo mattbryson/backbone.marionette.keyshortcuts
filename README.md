@@ -8,7 +8,7 @@ An extension to `Backbone.Marionette.View` that adds a `keyShortcuts` hash to th
 # Installation
     npm install backbone.marionette.keyshortcuts
 
-If you are using `requireJS` then you need to ensure that `mousetrap` can be found on the default path, or is defined in you require config.
+If you are using `requireJS` then you need to ensure that `mousetrap` can be found on the default path, or is defined in your require config.
 ```` javascript
     paths: {
       'backbone.marionette.keyShortcuts': '/vendor/marionette/backbone.marionette.keyshortcuts',
