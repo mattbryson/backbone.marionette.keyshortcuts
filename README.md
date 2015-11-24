@@ -1,5 +1,5 @@
 # backbone.marionette.keyshortcuts
-An extension to Backbone.Marionette.View that adds a `keyShortcuts` hash to the view object, allowing you to register keyboard commands.
+An extension to `Backbone.Marionette.View` that adds a `keyShortcuts` hash to the view object, allowing you to register keyboard commands using `Mousetrap.js`.
 
 # Dependencies
  * Marionette https://github.com/marionettejs/backbone.marionette
@@ -8,20 +8,20 @@ An extension to Backbone.Marionette.View that adds a `keyShortcuts` hash to the 
 # Installation
     npm install backbone.marionette.keyshortcuts
 
-If you are using requireJS then you need to ensure that `mousetrap` can be found on the default path, or is defined in you require config.
-
+If you are using `requireJS` then you need to ensure that `mousetrap` can be found on the default path, or is defined in you require config.
+```` javascript
     paths: {
-      'backbone.marionette.keyShortcuts': '/vendor/marionette/backbone.marionette.keyShortcuts',
+      'backbone.marionette.keyShortcuts': '/vendor/marionette/backbone.marionette.keyshortcuts',
       'mousetrap':'/vendor/mousetrap/mousetrap.min'
     }
-
+````
 
 # Usage
 
-In your View class, simply add a `keyShortcuts` like you would for the `events` hash.
+In your `View` class, simply add a `keyShortcuts` like you would for the `events` hash.
 
-It supports single keys, key combinations and defining the event trigger. 
-
+It supports single keys and key combinations. To define the event trigger, add a double colon, followed by the event name after your key combination; `'d::keyup'`.
+```` javascript
     View.MyForm = Marionette.ItemView.extend({
       tagName: 'form',
       keyShortcuts:{
@@ -40,9 +40,9 @@ It supports single keys, key combinations and defining the event trigger.
         this.model.save();
       }
     });
-
+````
 Or you can define them in a Behaviors class
-    
+```` javascript   
     ShortcutsBehaviour = Marionette.Behavior.extend({
     
       keyShortcuts: {
@@ -65,7 +65,7 @@ Or you can define them in a Behaviors class
         }
       },
     });
-
+````
 
 # Info
 See https://craig.is/killing/mice for how to use Mousetrap.
