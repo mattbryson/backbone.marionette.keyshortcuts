@@ -1,0 +1,30 @@
+{
+  "name": "backbone.marionette.keyshortcuts",
+  "version": "1.0.0",
+  "description": "An extension to Backbone.Marionette.View that adds a \"keyShortcuts\" hash to the view object, allowing you to register keyboard commands.",
+  "main": "backbone.marionette.keyshortcuts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mattbryson/backbone.marionette.keyshortcuts.git"
+  },
+  "keywords": [
+    "Backbone",
+    "Marionette",
+    "Keyboard",
+    "shortcuts",
+    "Keycommands"
+  ],
+  "author": "matt  bryson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattbryson/backbone.marionette.keyshortcuts/issues"
+  },
+  "homepage": "https://github.com/mattbryson/backbone.marionette.keyshortcuts",
+  "dependencies": {
+    "marionette": "0.0.0",
+    "mousetrap": "^1.5.3"
+  }
+}
