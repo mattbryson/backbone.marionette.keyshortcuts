@@ -41,7 +41,7 @@ View.MyForm = Marionette.ItemView.extend({
  }
 });
 ````
-Or you can define them in a Behavior class
+Or you can define them in a `Behavior` class
 ```` javascript   
 ShortcutsBehaviour = Marionette.Behavior.extend({
  keyShortcuts: {
