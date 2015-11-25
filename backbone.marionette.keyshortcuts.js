@@ -5,7 +5,7 @@
  * "keyShortcuts": {
  *    "command+s":"save", 
  *    "up up down left" : function() { console.log("you win") }
- *    "up up down left::keydown" : function() { console.log("triggers on key down") }
+ *    "up up down left:keydown" : function() { console.log("triggers on key down") }
  * }
  * 
  */
@@ -89,25 +89,28 @@
             destroy.call(this);
             this.unbindShortcuts(); 
         }),
-     
+
         bindShortcuts:function(keyShortcuts){
             var events = getCombinedKeyShortcuts(this,keyShortcuts);
 
             if (!events) return this;
+            this.mousetrap = this.mousetrap || new Mousetrap(document);
             for (var key in events) {
                 var method = events[key];
                 if (!_.isFunction(method)) method = this[method];
                 if (!method) continue;
-                var match = key.split("::");
-                Mousetrap.bind(match[0], _.bind(method, this), match[1]);
+                var match = key.split(":");
+                this.mousetrap.bind(match[0], _.bind(method, this), match[1]);
             }
         },
 
         unbindShortcuts:function(keyShortcuts) {
             var events = getCombinedKeyShortcuts(this,keyShortcuts);
+
+            if (!events || !this.mousetrap) return this;
             for (var key in events) {
-                var match = key.split("::");
-                Mousetrap.unbind(match[0], match[1]);
+                var match = key.split(":");
+                this.mousetrap.unbind(match[0], match[1]);
             }
         }
     });
