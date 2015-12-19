@@ -20,14 +20,14 @@ If you are using `requireJS` then you need to ensure that `mousetrap` can be fou
 
 In your `View` class, simply add a `keyShortcuts` like you would for the `events` hash.
 
-It supports single keys and key combinations. To define the event trigger, add a double colon, followed by the event name after your key combination; `'d::keyup'`.
+It supports single keys and key combinations. To define the event trigger, add a colon followed by the event name after your key combination; `'d:keyup'`.
 ```` javascript
 View.MyForm = Marionette.ItemView.extend({
  tagName: 'form',
  keyShortcuts:{
   'command+s' : 'save',
   'up up down left' : function() { console.log('cheat!') },
-  'd::keyup' : function() { console.log('d key was released') },
+  'd:keyup' : function() { console.log('d key was released') },
  },
  events: {
   'click @saveBtn' : 'save',
