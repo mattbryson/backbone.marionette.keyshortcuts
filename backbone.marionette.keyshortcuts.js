@@ -42,7 +42,7 @@
             var behaviorKeyShortcuts = _.clone(_.result(b, 'keyShortcuts')) || {};
             _.each(behaviorKeyShortcuts, function(behavior, key) {
                 var handler   = _.isFunction(behavior) ? behavior : b[behavior];
-                _keyShortcuts[key]=handler;
+                _keyShortcuts[key]=handler.bind(b);
             }, view);
 
             _behaviorKeyShortcuts = _.extend(_behaviorKeyShortcuts, _keyShortcuts); ;
