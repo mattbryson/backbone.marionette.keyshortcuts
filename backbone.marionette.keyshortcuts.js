@@ -65,54 +65,59 @@
       var behaviorKeyShortcuts = _.result(view, 'behaviorKeyShortcuts', {});
       return _.extend({}, keyShortcuts, behaviorKeyShortcuts);
     }
-    
-
-    var proto = Backbone.Marionette.View.prototype;
 
     /**
      * Extend the View with the bind and unbind shortcut methods, 
      * and execute them from Marionettes delegate and undelegate event methods.
      */
-    _.extend(proto, {
-        delegateEvents:_.wrap(proto.delegateEvents, function(delegate, events) {
-            delegate.call(this, events);
-            wrapBehaviorShortcuts(this); 
-            this.bindShortcuts(); 
-        }),
+    var extFn = function(proto) {
+        return {
+          delegateEvents:_.wrap(proto.delegateEvents, function(delegate, events) {
+              delegate.call(this, events);
+              wrapBehaviorShortcuts(this); 
+              this.bindShortcuts(); 
+          }),
 
-        undelegateEvents:_.wrap(proto.undelegateEvents, function(undelegate, events) {
-            undelegate.call(this, events);
-            this.unbindShortcuts();   
-        }),
+          undelegateEvents:_.wrap(proto.undelegateEvents, function(undelegate, events) {
+              undelegate.call(this, events);
+              this.unbindShortcuts();   
+          }),
 
-        destroy:_.wrap(proto.destroy, function(destroy) {
-            destroy.call(this);
-            this.unbindShortcuts(); 
-        }),
+          destroy:_.wrap(proto.destroy, function(destroy) {
+              destroy.call(this);
+              this.unbindShortcuts(); 
+          }),
 
-        bindShortcuts:function(keyShortcuts){
-            var events = getCombinedKeyShortcuts(this,keyShortcuts);
+          bindShortcuts:function(keyShortcuts){
+              var events = getCombinedKeyShortcuts(this,keyShortcuts);
 
-            if (!events) return this;
-            this.mousetrap = this.mousetrap || new Mousetrap(document);
-            for (var key in events) {
-                var method = events[key];
-                if (!_.isFunction(method)) method = this[method];
-                if (!method) continue;
-                var match = key.split(":");
-                this.mousetrap.bind(match[0], _.bind(method, this), match[1]);
-            }
-        },
+              if (!events) return this;
+              this.mousetrap = this.mousetrap || new Mousetrap(document);
+              for (var key in events) {
+                  var method = events[key];
+                  if (!_.isFunction(method)) method = this[method];
+                  if (!method) continue;
+                  var match = key.split(":");
+                  this.mousetrap.bind(match[0], _.bind(method, this), match[1]);
+              }
+          },
 
-        unbindShortcuts:function(keyShortcuts) {
-            var events = getCombinedKeyShortcuts(this,keyShortcuts);
+          unbindShortcuts:function(keyShortcuts) {
+              var events = getCombinedKeyShortcuts(this,keyShortcuts);
 
-            if (!events || !this.mousetrap) return this;
-            for (var key in events) {
-                var match = key.split(":");
-                this.mousetrap.unbind(match[0], match[1]);
-            }
-        }
-    });
+              if (!events || !this.mousetrap) return this;
+              for (var key in events) {
+                  var match = key.split(":");
+                  this.mousetrap.unbind(match[0], match[1]);
+              }
+          }
+      };
+    };
 
+    // Extend Marionette.View prototype
+    _.extend(Backbone.Marionette.View.prototype, extFn(Backbone.Marionette.View.prototype));
+
+    // In Marionette 3.x Marionette.CollectionView is not inherited from Marionette.View
+    if(!(Backbone.Marionette.CollectionView.prototype instanceof Backbone.Marionette.View))
+      _.extend(Backbone.Marionette.CollectionView.prototype, extFn(Backbone.Marionette.CollectionView.prototype));
 }));
