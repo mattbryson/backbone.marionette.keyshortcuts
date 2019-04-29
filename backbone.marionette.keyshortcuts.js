@@ -19,7 +19,7 @@
         return factory(_ || root._, Backbone || root.Backbone, Marionette || root.Marionette, Mousetrap || root.Mousetrap);
       });
    } else if (typeof exports === 'object') {
-     module.exports = factory(require("underscore"), require("backbone"), require("marionette"), require("mousetrap"));
+     module.exports = factory(require("underscore"), require("backbone"), require("backbone.marionette"), require("mousetrap"));
    } else {
       // RequireJS isn't being used. Assume underscore and backbone are loaded in <script> tags
       factory(_, Backbone, Marionette, Mousetrap);
