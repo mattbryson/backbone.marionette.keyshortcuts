@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/mattbryson/backbone.marionette.keyshortcuts",
   "dependencies": {
-    "backbone.marionette": "2.x - 3.x",
+    "backbone.marionette": "https://github.com/klaronix/backbone.marionette.git#branches/v3.5.1",
     "mousetrap": "^1.5.3"
   }
 }
